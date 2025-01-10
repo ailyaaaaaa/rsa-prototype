@@ -61,9 +61,9 @@ public class RSAPrototype {
                 // Generate a random e in the range (1, phi).
                 // We ensure e > 1 and < phi, and gcd(e, phi) = 1
                 e = new BigInteger(phi.bitLength(), random);
-            } while ( e.compareTo(BigInteger.ONE) <= 0
-                   || e.compareTo(phi) >= 0
-                   || !phi.gcd(e).equals(BigInteger.ONE) );
+            } while (e.compareTo(BigInteger.ONE) <= 0
+                    || e.compareTo(phi) >= 0
+                    || !phi.gcd(e).equals(BigInteger.ONE));
 
             d = e.modInverse(phi);
         }
@@ -113,11 +113,11 @@ public class RSAPrototype {
         Scanner scanner = new Scanner(System.in);
         RSAKeyGenerator keyGen = new RSAKeyGenerator();
 
-        // Generate Secure RSA 
+        // Generate Secure RSA
         keyGen.generateKeys();
-        RSA secureRSA = new RSA(keyGen.getPublicKeyE(), 
-                                keyGen.getPrivateKeyD(), 
-                                keyGen.getPublicKeyN());
+        RSA secureRSA = new RSA(keyGen.getPublicKeyE(),
+                keyGen.getPrivateKeyD(),
+                keyGen.getPublicKeyN());
 
         // Demonstrate encryption/decryption with large primes
         System.out.println("\n=== Secure Communication ===");
@@ -143,7 +143,7 @@ public class RSAPrototype {
         BigInteger secureDecrypted = secureRSA.decrypt(secureCipher);
         System.out.println("Bob decrypts: " + secureDecrypted);
 
-        //Insecure Scenario in a loop
+        // Insecure Scenario in a loop
         System.out.println("\n=== Insecure Scenario ===");
         System.out.println("(Type 'exit' at any prompt to quit.)");
 
@@ -171,7 +171,7 @@ public class RSAPrototype {
                 q = new BigInteger(qInput);
             } catch (NumberFormatException ex) {
                 System.out.println("[ERROR] Invalid integer input. Please try again.");
-                continue;  // go back to top of while-loop
+                continue; // go back to top of while-loop
             }
 
             // Build the insecure keys
@@ -182,11 +182,11 @@ public class RSAPrototype {
             BigInteger n = keyGen.getPublicKeyN();
             BigInteger d = keyGen.getPrivateKeyD();
 
-            //validation p and q are not distinct
+            // validation p and q are not distinct
             if (p.equals(q)) {
                 System.out.println("Error: Primes p and q must be distinct.");
                 continue;//
-                }
+            }
 
             System.out.println("\nInsecure Public Key: (e=" + e + ", n=" + n + ")");
             System.out.println("Insecure Private Key: d=" + d);
@@ -205,7 +205,7 @@ public class RSAPrototype {
                 insecureMsg = new BigInteger(msgInput);
             } catch (NumberFormatException ex) {
                 System.out.println("[ERROR] Invalid integer input. Please try again.");
-                continue;  // loop again
+                continue; // loop again
             }
 
             // Encrypt the message
@@ -222,7 +222,7 @@ public class RSAPrototype {
             // Compare bobDecrypted with insecureMsg to see if they're the same
             boolean matchesOriginal = bobDecrypted.equals(insecureMsg);
 
-            // Check #1: Are p and q truly prime? 
+            // Check #1: Are p and q truly prime?
             if (!isPrime(p) || !isPrime(q)) {
                 // Show that it doesn't decrypt properly
                 System.out.println("\n[WARNING] p or q isn't prime => This might break RSA math.");
@@ -240,7 +240,8 @@ public class RSAPrototype {
                 System.out.println("[INFO] Original Message:  " + insecureMsg);
                 System.out.println("[INFO] Decrypted Message: " + bobDecrypted);
                 if (!matchesOriginal) {
-                    System.out.println("[RESULT] Decryption differs from the original. This is expected because m >= n.");
+                    System.out
+                            .println("[RESULT] Decryption differs from the original. This is expected because m >= n.");
                 }
                 continue; // loop again
             }
