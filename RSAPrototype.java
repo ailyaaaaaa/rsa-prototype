@@ -182,6 +182,12 @@ public class RSAPrototype {
             BigInteger n = keyGen.getPublicKeyN();
             BigInteger d = keyGen.getPrivateKeyD();
 
+            //validation p and q are not distinct
+            if (p.equals(q)) {
+                System.out.println("Error: Primes p and q must be distinct.");
+                continue;//
+                }
+
             System.out.println("\nInsecure Public Key: (e=" + e + ", n=" + n + ")");
             System.out.println("Insecure Private Key: d=" + d);
 
