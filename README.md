@@ -9,3 +9,5 @@ Hardware requirements:
 Software requirements:
 - JDK 8 or higher
 - A simple text editor or IDE (e.g. IntelliJ, VS Code)
+
+By Josh Ollivierre, Jerrod Sim, Freddy Alejandro Rodriguez Figueroa, and Ailya Sayed
